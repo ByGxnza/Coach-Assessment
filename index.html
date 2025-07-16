@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clase gratuita con Fede</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="card">
+    <h2>Clase gratuita 1 a 1</h2>
+    <p>Completá tus datos para continuar:</p>
+    <form id="step1">
+      <input type="text" name="nombre" placeholder="Tu nombre" required />
+      <input type="number" name="edad" placeholder="Edad" required />
+      <input type="email" name="correo" placeholder="Correo electrónico" required />
+      <button type="submit">Comenzar</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('step1').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = this.nombre.value;
+      const edad = this.edad.value;
+      const correo = this.correo.value;
+
+      localStorage.setItem('reserva_nombre', nombre);
+      localStorage.setItem('reserva_edad', edad);
+      localStorage.setItem('reserva_correo', correo);
+
+      window.location.href = "formulario.html";
+    });
+  </script>
+</body>
+</html>
