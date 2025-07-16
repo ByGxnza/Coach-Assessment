@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Entrenamiento 1 a 1 sin costo | Fede Coach</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <form id="formFede">
@@ -58,6 +58,23 @@
   </form>
 
   <script>
+    // Precargar datos del paso anterior
+    window.addEventListener("DOMContentLoaded", () => {
+      const nombre = localStorage.getItem('reserva_nombre');
+      const edad = localStorage.getItem('reserva_edad');
+      const correo = localStorage.getItem('reserva_correo');
+
+      if (nombre) document.getElementById('nombre').value = nombre;
+      if (edad) document.getElementById('edad').value = edad;
+
+      const correoInput = document.createElement("input");
+      correoInput.type = "hidden";
+      correoInput.name = "correo";
+      correoInput.value = correo;
+      document.getElementById("formFede").appendChild(correoInput);
+    });
+
+    // Enviar al webhook
     document.getElementById('formFede').addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -69,7 +86,8 @@
         turno: form.turno.value,
         compromiso: form.compromiso.value,
         lesion: form.lesion?.value || "No especificado",
-        contacto: form.contacto.value.trim()
+        contacto: form.contacto.value.trim(),
+        correo: form.correo?.value || "No especificado"
       };
 
       const queryString = new URLSearchParams(data).toString();
